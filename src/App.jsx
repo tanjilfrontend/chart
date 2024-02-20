@@ -16,6 +16,7 @@ import ModalPopUp from "./components/ModalPopUp";
 import ModalUpsale from "./components/ModalUpsale";
 import ModalIncentive from "./components/ModalIncentive";
 import ModalRegular from "./components/ModalRegular";
+import ModalAverage from "./components/ModalAverage";
 
 
 
@@ -24,6 +25,7 @@ function App() {
   const [openModalUpsale, setOpenModalUpsale] = useState(false);
   const [openModalIncentive, setOpenModalIncentive] = useState(false);
   const [openModalRegular, setOpenModalRegular] = useState(false);
+  const [openModalAverage, setOpenModalAverage] = useState(false);
 
   return (
     <div className="mx-10 bg-white">
@@ -205,7 +207,8 @@ function App() {
   <p className="text-sm font-medium text-[#000] py-3">Achieved: 03%</p>
   <p className="text-sm font-medium text-[#000] py-3">Achieved: 40%</p>
   <p className="text-sm font-medium text-[#000] py-3">Achieved: 80%</p>
-  <p className="text-sm font-medium text-[#F66] py-3 underline cursor-pointer">0.00%</p>
+  <p className="text-sm font-medium text-[#F66] py-3 underline cursor-pointer" onClick={()=>setOpenModalAverage(true)}>0.00%</p>
+  <ModalAverage setOpenModal={setOpenModalAverage} openModal={openModalAverage}/>
 </div>
 </div>
 {/* 2nd data  */}
