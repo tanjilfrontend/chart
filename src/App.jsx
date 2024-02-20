@@ -1,14 +1,50 @@
+import { Tooltip } from "flowbite-react";
+import BagSvg from "./components/BagSvg";
+import BonusPointBarBottom from "./components/BonusPointBarBottom";
 import Button from "./components/Button"
+import CalenderSvg from "./components/CalenderSvg";
 import BonusPointBar from "./components/ChartComponent"
 import ChartSingleBar from "./components/ChartSingleBar"
-import { IdealX1, IdealX2, IdealX3, IdealX4, IdealX5, IdealX6, data1, data2, data3, data4, data5, data6 } from "./utils/chartData"
+import ChartSingleBarPointer from "./components/ChartSingleBarPointer";
+import DownArrow from "./components/DownArrow";
+import NoteSvg from "./components/NoteSvg";
+import PersonSvg from "./components/PersonSvg";
+import StarSvg from "./components/StarSvg";
+import { IdealX1, IdealX2, IdealX3, IdealX4, IdealX5, IdealX6, IdealXBottom, bonusColorRange, bonusColorRangeLast, colorRange, data1, data2, data3, data4, data5, data6, dataBottom } from "./utils/chartData"
+import { useState } from "react";
+import ModalPopUp from "./components/ModalPopUp";
+import ModalUpsale from "./components/ModalUpsale";
+import ModalIncentive from "./components/ModalIncentive";
+import ModalRegular from "./components/ModalRegular";
+
 
 
 function App() {
-
+  const [openModal, setOpenModal] = useState(false);
+  const [openModalUpsale, setOpenModalUpsale] = useState(false);
+  const [openModalIncentive, setOpenModalIncentive] = useState(false);
+  const [openModalRegular, setOpenModalRegular] = useState(false);
 
   return (
     <div className="mx-10 bg-white">
+      <header>
+        <div className="flex justify-between mt-5">
+          <div className="flex items-center ">
+            <CalenderSvg/>
+            <p className="text-[12px] font-medium">Date : December 1, 2023 to Dece...</p>
+          </div>
+          <div className="flex items-center cursor-pointer">
+            <PersonSvg/>
+            <p className="text-[12px] font-medium">Employee: <span className="text-[#1492E6]">Faria Abbashi</span></p> &nbsp;
+            <DownArrow/>
+          </div>
+          <div className="flex items-center cursor-pointer">
+            <PersonSvg/>
+            <p className="text-[12px] font-medium">Department: <span className="text-[#1492E6]">Web Development</span></p>&nbsp;
+            <DownArrow/>
+          </div>
+        </div>
+      </header>
       <div className="flex justify-between my-10">
         <div className="flex gap-2.5">
          <Button text="Current" active={true}/>
@@ -39,7 +75,7 @@ function App() {
         </div>
       </div>
 
-
+{/* chart section  */}
 <div className="bg-[#F2F9FE] my-8 rounded-[22px]">
 <p className="text-[#000] text-xl font-medium pt-6 px-5">Ideal vs Achieved :</p>
 <div className="flex gap-5 ">
@@ -101,7 +137,7 @@ function App() {
   </div>
 </div>
 
-<div className="flex gap-5 ">
+<div className="flex gap-5">
   <div className="w-1/2  m-5 bg-white rounded-[22px]">
   <BonusPointBar leftTitle="Milestone Cancelation Rate" yTitle="Incentive percentage" xTitle="Milestone Cancelation Rate" xCategory={IdealX4} data={data4} max={120} tickAmount={6}/>
   </div>
@@ -119,16 +155,373 @@ function App() {
   <div className="w-1/2  m-5 bg-white rounded-[22px]">
   <BonusPointBar leftTitle="Deadline Miss Rate" yTitle="Incentive percentage" xTitle="Deadline Miss Rate" xCategory={IdealX5} data={data5} max={100} tickAmount={5}/>
   </div>
+  <div className="w-1/2  m-5 bg-white rounded-[22px]">
+  <ChartSingleBar
+  leftTitle="Deadline Miss Rate"
+  max={100}
+  data={[0,0,0,0,80]}
+  y={40}
+  tickAmount={4}
+/>
+  </div>
 </div>
 <div className="flex gap-5 ">
   <div className="w-1/2  m-5 bg-white rounded-[22px]">
   <BonusPointBar leftTitle="Client Retention Rate" yTitle="Incentive percentage" xTitle="Client Retention Rate" xCategory={IdealX6} data={data6} max={120} tickAmount={6}/>
   </div>
+  <div className="w-1/2  m-5 bg-white rounded-[22px]">
+  <ChartSingleBar
+  leftTitle="Client Retention Rate"
+  max={120}
+  data={[0,81]}
+  y={13}
+  tickAmount={5}
+/>
+  </div>
 </div>
 
 </div>
+
+{/* data section progress  */}
+
+<div className="my-5 bg-[#F2F9FE] rounded-[19px] py-6 px-6">
+<div className="grid grid-cols-3 gap-5">
+<div className="flex gap-10">
+<div>
+  <p className="text-sm font-medium text-[#000] py-3">Revision vs task ratio:</p>
+  <p className="text-sm font-medium text-[#F66] py-3">Goal achieve rate:</p>
+  <p className="text-sm font-medium text-[#000] py-3">Negative points vs positive points:</p>
+  <p className="text-sm font-medium text-[#000] py-3">Percentage of delayed projects:</p>
+  <p className="text-sm font-medium text-[#000] py-3">Milestone cancelation rate:</p>
+  <p className="text-sm font-medium text-[#000] py-3">Deadline miss rate</p>
+  <p className="text-sm font-medium text-[#000] py-3">Client retention rate</p>
+  <p className="text-sm font-medium text-[#F66] py-3">Average:</p>
+</div>
+<div>
+  <p className="text-sm font-medium text-[#000] py-3">Achieved: 80%</p>
+  <p className="text-sm font-medium text-[#F66] py-3">Achieved: 00%</p>
+  <p className="text-sm font-medium text-[#000] py-3">Achieved: 80%</p>
+  <p className="text-sm font-medium text-[#000] py-3">Achieved: 29%</p>
+  <p className="text-sm font-medium text-[#000] py-3">Achieved: 03%</p>
+  <p className="text-sm font-medium text-[#000] py-3">Achieved: 40%</p>
+  <p className="text-sm font-medium text-[#000] py-3">Achieved: 80%</p>
+  <p className="text-sm font-medium text-[#F66] py-3 underline cursor-pointer">0.00%</p>
+</div>
+</div>
+{/* 2nd data  */}
+<div>
+
+<div className="mt-1">
+      <div className="flex justify-between mb-1">
+         <div className="text-[#67686C] font-medium text-[10.018px]">
+         Revision vs task ratio:
+        </div>
+         <div className="text-[#1C1E24] font-medium text-[10.018px]">
+         50/100%
+        </div>
+      </div>
+      <div className="customGradientProgressBarWrapper w-20">
+        <div className="customGradientProgressBar primaryG w-[50%]">
+        </div>
+      </div>
+      </div>
+
+      <div className="mt-2">
+      <div className="flex justify-between mb-1">
+         <div className="text-[#67686C] font-medium text-[10.018px]">
+         Goal achieve rate
+        </div>
+         <div className="text-[#1C1E24] font-medium text-[10.018px]">
+         00/100%
+        </div>
+      </div>
+      <div className="customGradientProgressBarWrapper redBg w-20">
+        <div className="customGradientProgressBar primaryG w-[0%]">
+        </div>
+      </div>
+      </div>
+
       
+      <div className="mt-2">
+      <div className="flex justify-between mb-2">
+         <div className="text-[#67686C] font-medium text-[10.018px]">
+         Negative points vs positive points:
+        </div>
+         <div className="text-[#1C1E24] font-medium text-[10.018px]">
+         80/100%
+        </div>
+      </div>
+      <div className="customGradientProgressBarWrapper w-20">
+        <div className="customGradientProgressBar primaryG w-[80%]">
+        </div>
+      </div>
+      </div>
+
+      <div className="mt-2">
+      <div className="flex justify-between mb-2">
+         <div className="text-[#67686C] font-medium text-[10.018px]">
+         Percentage of delayed projects:
+        </div>
+         <div className="text-[#1C1E24] font-medium text-[10.018px]">
+         29/120%
+        </div>
+      </div>
+      <div className="customGradientProgressBarWrapper w-20">
+        <div className="customGradientProgressBar primaryG w-[29%]">
+        </div>
+      </div>
+      </div>
+
+      <div className="mt-2">
+      <div className="flex justify-between mb-2">
+         <div className="text-[#67686C] font-medium text-[10.018px]">
+         Milestone cancelation rate:
+        </div>
+         <div className="text-[#1C1E24] font-medium text-[10.018px]">
+         03/100%
+        </div>
+      </div>
+      <div className="customGradientProgressBarWrapper w-20">
+        <div className="customGradientProgressBar primaryG w-[3%]">
+        </div>
+      </div>
+      </div>
+
+      <div className="mt-2">
+      <div className="flex justify-between mb-2">
+         <div className="text-[#67686C] font-medium text-[10.018px]">
+         Deadline miss rate:
+        </div>
+         <div className="text-[#1C1E24] font-medium text-[10.018px]">
+         40/100%
+        </div>
+      </div>
+      <div className="customGradientProgressBarWrapper w-20">
+        <div className="customGradientProgressBar primaryG w-[40%]">
+        </div>
+      </div>
+      </div>
+
+      <div className="mt-2">
+      <div className="flex justify-between mb-2">
+         <div className="text-[#67686C] font-medium text-[10.018px]">
+         Client retention rate
+        </div>
+         <div className="text-[#1C1E24] font-medium text-[10.018px]">
+         80/100%
+        </div>
+      </div>
+      <div className="customGradientProgressBarWrapper w-20">
+        <div className="customGradientProgressBar primaryG w-[80%]">
+        </div>
+      </div>
+      </div>
+
+      <div className="mt-2">
+      <div className="flex justify-between mb-2">
+         <div className="text-[#67686C] font-medium text-[10.018px]">
+         Average:
+        </div>
+         <div className="text-[#1C1E24] font-medium text-[10.018px]">
+         00/100%
+        </div>
+      </div>
+      <div className="customGradientProgressBarWrapper redBg w-20">
+        <div className="customGradientProgressBar primaryG w-[0%]">
+        </div>
+      </div>
+      </div>
+    
+
+</div>
+
+{/* 3rd data  */}
+<div className="flex items-center justify-start ml-24">
+<div className="flex flex-col items-start">
+<div className="flex items-center justify-center gap-2 my-4">
+      <StarSvg/>
+    <p className="text-[#000] text-base font-medium">Your Regular points: <span className="text-[#f66] underline cursor-pointer" onClick={() => setOpenModalRegular(true)}>00 pt</span></p>
+    <ModalRegular openModal={openModalRegular} setOpenModal={setOpenModalRegular}/> 
     </div>
+    <div className="flex items-center justify-center gap-2 my-6">
+      <StarSvg/>
+    <p className="text-[#000] text-base font-medium">Your actual incentive points: <span className="text-[#f66] underline cursor-pointer" onClick={() => setOpenModalIncentive(true)}>400 pt</span></p>
+    <ModalIncentive openModal={openModalIncentive} setOpenModal={setOpenModalIncentive}/> 
+    <Tooltip width="10" content="This is after multiplying your regular points with the average percentage calculated earlier" placement="bottom" style="light">
+    <NoteSvg />
+      </Tooltip>
+    
+    </div>
+
+    <div className="">
+      <p className="text-sm font-medium text-[#000]"><span className="text-[#F66]">Note:</span> If you fail to maintain the minimum incentive slab for
+any of the criteria, your overall incentive percentage will be zero.</p>
+    </div>
+</div>
+</div>
+</div>
+</div>
+{/* data section progress end */}
+
+{/* Upsale  */}
+
+<div>
+  <h3 className="font-medium text-xl text-[#000] ml-4 my-6">Upsale/Cross Sale Amount</h3>
+
+  <div className="bg-[#F2F9FE] rounded-[22px] pb-3">
+  <div className="flex gap-5 ">
+  <div className="w-1/2  m-5 rounded-[22px]">
+  <BonusPointBarBottom leftTitle="Upsale/Cross Sale Amount" yTitle="Points Percentage" xTitle="Upsale/Cross Sale Amount" xCategory={IdealXBottom} data={dataBottom} max={6} tickAmount={5} colorRange={colorRange}/>
+  </div>
+  <div className="w-1/2  m-5 bg-white rounded-[22px]">
+
+  <ChartSingleBarPointer
+  leftTitle="Upsale/Cross Sale Amount"
+  max={6}
+  data={[0,0,5]}
+  y={1201}
+  tickAmount={4}
+  xAxisCategories={["1-$500", "501-$1200", "1201-$1800", "1801-$3000", "$3001-$Higher"]}
+/>
+  </div>
+</div>
+{/* card  */}
+<div className="bg-[#E1F3FF] rounded-[10px] mx-4 my-4">
+  <div className="px-8 py-2 flex justify-between">
+  <div className="flex items-center justify-center gap-2 my-4">
+      <StarSvg/>
+      <p className="text-[#000] text-base font-medium">Your upsale/cross sales points: <span className="text-[#1492E6] underline text-[21px] font-semibold cursor-pointer" onClick={() => setOpenModalUpsale(true)}>60.05 pt</span></p>
+      <ModalUpsale openModal={openModalUpsale} setOpenModal={setOpenModalUpsale}/>
+    </div>
+  <div className="flex items-center justify-center gap-2 my-4">
+   <p className="w-[1px] h-[39px] bg-[#D8D8D8]"></p>
+    </div>
+  <div className="flex items-center justify-center gap-2 my-4">
+      <BagSvg/>
+      <p className="text-[#000] text-base font-medium">Cash value of every upsale/cross sale point: <span className="text-[#1492E6] text-[21px] font-semibold">100 TK</span></p>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+{/* Upsale  */}
+
+{/* Bonus point  */}
+
+<div>
+  <h3 className="font-medium text-xl text-[#000] ml-4 my-6">Bonus Points</h3>
+
+  <div className="bg-[#F2F9FE] rounded-[22px] pb-3">
+  <div className="flex gap-5 ">
+  <div className="w-1/2  m-5 rounded-[22px]">
+  <BonusPointBarBottom leftTitle="Bonus Points Based on Released Amount" yTitle="Bonus Points" xTitle="Released Amounts" xCategory={['0-6000','6001-8000','8001-10000','10001-12000','12001-15000','15001-Higher']} data={[5,20,40,60,80,120]} max={120} tickAmount={6} colorRange={bonusColorRange}/>
+  </div>
+  <div className="w-1/2  m-5 bg-white rounded-[22px]">
+
+  <ChartSingleBarPointer
+  leftTitle="Bonus Points Based on Released Amount"
+  yTitle="Bonus Points"
+  max={120}
+  data={[0,0,0,60]}
+  y={1100}
+  tickAmount={6}
+  xAxisCategories={['0-6000','6001-8000','8001-10000','10001-12000','12001-15000','15001-Higher']}
+/>
+  </div>
+</div>
+  <div className="flex gap-5 ">
+  <div className="w-1/2  m-5 rounded-[22px] pb-4">
+  <BonusPointBarBottom leftTitle="Unreleased Payment Amount" yTitle="Incentive Percentage" xTitle="Unreleased Payment Amount" xCategory={['0-5000','5001-10000','10001-15000','15001-20000','20001-25000','25001-30000','30001-35000']} data={[100,80,50,10,5,5,5]} max={100} tickAmount={5} colorRange={bonusColorRangeLast}/>
+  </div>
+  <div className="w-1/2  m-5 bg-white rounded-[22px]">
+
+  <ChartSingleBarPointer
+  leftTitle="Unreleased Payment Amount"
+  yTitle="Incentive Percentage"
+  max={100}
+  data={[0,80]}
+  y={8350}
+  tickAmount={5}
+  xAxisCategories={['0-5000','5001-10000','10001-15000','15001-20000','20001-25000','25001-30000','30001-35000']}
+/>
+  </div>
+</div>
+
+{/* card  */}
+<div className="bg-[#E1F3FF] rounded-[10px] mx-4 my-4">
+  <div className="px-8 py-2 flex justify-between">
+  <div className="flex items-center justify-center gap-2 my-4">
+      <StarSvg/>
+      <p className="text-[#000] text-base font-medium">Your bonus points: <span className="text-[#1492E6]  text-[21px] font-semibold">60 pt</span></p> <Tooltip width="10" content="This value is bonus point" placement="bottom" style="light">
+    <NoteSvg />
+      </Tooltip>
+    </div>
+  <div className="flex items-center justify-center gap-2 my-4">
+   <p className="w-[1px] h-[39px] bg-[#AAE3FF]"></p>
+    </div>
+    <div className="flex items-center justify-center gap-2 my-4">
+      <StarSvg/>
+      <p className="text-[#000] text-base font-medium">Incentive Percentage: <span className="text-[#1492E6] text-[21px] font-semibold">80 %</span></p> <NoteSvg/>
+    </div>
+    <div className="flex items-center justify-center gap-2 my-4">
+   <p className="w-[1px] h-[39px] bg-[#AAE3FF]"></p>
+    </div>
+  <div className="flex items-center justify-center gap-2 my-4">
+      <BagSvg/>
+      <p className="text-[#000] text-base font-medium">Final Points: <span className="text-[#1492E6] text-[21px] font-semibold underline cursor-pointer" onClick={() => setOpenModal(true)}>48 pt</span></p>
+    </div>
+    <ModalPopUp openModal={openModal} setOpenModal={setOpenModal}/>
+    <div className="flex items-center justify-center gap-2 my-4">
+   <p className="w-[1px] h-[39px] bg-[#AAE3FF]"></p>
+    </div>
+    <div className="flex items-center justify-center gap-2 my-4">
+      <BagSvg/>
+      <p className="text-[#000] text-base font-medium">Cash value of every bonus point: <span className="text-[#1492E6] text-[21px] font-semibold">100 TK</span></p>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+<footer className="bg-[#1492E6] rounded-[13px] my-5">
+  <div className="py-5 px-5 grid grid-cols-4">
+<div className="p-5 flex items-center">
+  <ul>
+    <li className="py-1 text-white text-sm font-normal">Your regular points: <span className="font-semibold">500pt</span></li>
+    <li className="py-1 text-white text-sm font-normal">Your actual regular points: <span className="font-semibold">400pt</span></li>
+    <li className="py-1 text-white text-sm font-normal">Cash value for every regular point: <span className="font-semibold">20 Taka</span></li>
+    <li className="py-1 text-white text-sm font-normal">Final incentive amount for the regular points: 400*20= <span className="font-semibold">8000 Taka</span></li>
+  </ul>
+  <div className="w-[1px] h-[121px] bg-white"/>
+</div>
+<div className="p-5 flex items-center">
+  <ul>
+    <li className="py-1 text-white text-sm font-normal">Your upsale/cross sale points: <span className="font-semibold">60.05 pt</span></li>
+    <li className="py-1 text-white text-sm font-normal">Cash value for upsale cross points: <span className="font-semibold">100 Taka</span></li>
+    <li className="py-1 text-white text-sm font-normal">Incentive amount from the upsale/cross
+sales points: 60.05*100 tk= <span className="font-semibold">6005 Taka</span></li>
+  </ul>
+  <div className="w-[1px] h-[121px] bg-white"/>
+</div>
+<div className="p-5 flex items-center">
+  <ul>
+    <li className="py-1 text-white text-sm font-normal">Your bonus points based on released amount: <span className="font-semibold">20</span></li>
+    <li className="py-1 text-white text-sm font-normal">Cash value for bonus points: <span className="font-semibold">100 Taka</span></li>
+    <li className="py-1 text-white text-sm font-normal">Incentive amount from bonus points: 20*100= <span className="font-semibold">2000 Taka</span></li>
+  </ul>
+</div>
+<div className="bg-white rounded-[13px]">
+<div className="flex flex-col items-center gap-2 my-4">
+  <span className="mt-4"/>
+      <BagSvg/>
+      <p className="text-[#000] text-base font-medium">Cash value of every bonus point:</p>
+      <span className="text-[#1492E6] text-[21px] font-semibold">100 TK</span>
+    </div>
+</div>
+  </div>
+</footer>
+</div>
+
   )
 }
 

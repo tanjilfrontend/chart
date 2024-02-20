@@ -71,3 +71,110 @@ export const IdealX6=[
     "81-100%",
 ]
 
+export const IdealXBottom=[
+    "1-$5000",
+    "5001-$1200",
+    "1201-$1800",
+    "1801-$3000",
+    "$3001-$Higher",
+]
+export const dataBottom=[
+    3, 4, 5, 5.6, 6
+]
+
+export const colorRange= [
+    {
+      from: 0,
+      to: 3.1,
+      color: "#14B96A",
+    },
+    {
+      from: 3.1,
+      to: 4.1,
+      color: "#FEBC05",
+    },
+    {
+      from: 4,
+      to: 5,
+      color: "#09F",
+    },
+    {
+      from: 5,
+      to: 5.5,
+      color: "#FEBC05",
+    },
+    {
+      from: 5.9,
+      to: 6,
+      color: "#14B96A",
+    },
+  
+  ]
+export const bonusColorRange= [
+    {
+      from: 0,
+      to: 20,
+      color: "#FFA3A3", //holid
+    },
+    {
+      from: 20,
+      to: 40,
+      color: "#09F",
+    //   color: "#FEBC05",
+    },
+    {
+      from: 40,
+      to: 60,
+      color: "#FEBC05",
+    },
+    {
+      from: 60,
+      to: 80,
+      color: "#09F",
+    },
+    {
+      from: 80,
+      to: 100,
+      color: "#14B96A",
+    },
+    {
+      from: 100,
+      to: 120,
+      color: "#14B96A",
+    },
+  
+  ]
+export const bonusColorRangeLast= [
+    {
+      from: 0,
+      to: 5,
+      color: "#FFA3A3", //holid
+    },
+    {
+      from: 6,
+      to: 50,
+      color: "#FEBC05",
+    //   color: "#FEBC05",
+    },
+    {
+      from: 51,
+      to: 60,
+      color: "#FEBC05",
+    },
+    {
+      from: 61,
+      to: 80,
+      color: "#09F",
+    },
+    {
+      from: 81,
+      to: 100,
+      color: "#14B96A",
+    },
+    {
+      from: 100,
+      to: 120,
+      color: "#14B96A",
+    },
+  
+  ]
