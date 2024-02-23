@@ -1,5 +1,7 @@
 import { useRef } from "react";
 import Chart from "react-apexcharts";
+import UpArraow from "./svg-arrow/UpArraow";
+import SideArrow from "./svg-arrow/SideArrow";
 
 const BonusPointBarBottom = ({leftTitle,yTitle,xTitle,xCategory,max,tickAmount,data,colorRange}) => {
 
@@ -51,7 +53,7 @@ const BonusPointBarBottom = ({leftTitle,yTitle,xTitle,xCategory,max,tickAmount,d
         },
       },
       title: {
-        text: xTitle,
+        // text: xTitle,
         style: {
           fontSize: 12,
           fontWeight: 500,
@@ -76,7 +78,7 @@ const BonusPointBarBottom = ({leftTitle,yTitle,xTitle,xCategory,max,tickAmount,d
       
       },
       title: {
-        text: yTitle,
+        // text: yTitle,
         style: {
           fontSize: 12,
           fontWeight: 500,
@@ -184,7 +186,20 @@ const BonusPointBarBottom = ({leftTitle,yTitle,xTitle,xCategory,max,tickAmount,d
         type="bar"
         series={series}
         options={options}
+        className="relative"
       ></Chart>
+      <UpArraow className="absolute top-[28%] left-[18px] transform rotate-180"/>
+      <div className="flex flex-col absolute top-[58%] left-[30px]">
+     <span className="inline-block transform -rotate-90 origin-bottom-left text-[#1492E6] text-[12px] font-medium">{yTitle}</span>
+     </div>
+     <UpArraow className="absolute top-[66%] left-[18px]"/>
+     
+      <div className="flex justify-center gap-4 items-center">
+      <SideArrow/>
+     <span className="inline-block text-[#1492E6] text-[12px] font-medium">{xTitle}</span>
+     <SideArrow className="transform rotate-180"/>
+      </div>
+
       <button
         className="absolute top-4 right-4 text-base font-medium leading-[32px] text-[#1492E6] bg-white rounded-[5px] tracking-[-0.32px] px-[30px]"
       >

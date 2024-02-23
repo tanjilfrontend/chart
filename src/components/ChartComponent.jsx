@@ -1,5 +1,8 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Chart from "react-apexcharts";
+import UpArraow from "./svg-arrow/UpArraow";
+import UpArrow from "./svg-arrow/UpArraow";
+import SideArrow from "./svg-arrow/SideArrow";
 
 const BonusPointBar = ({leftTitle,yTitle,xTitle,xCategory,max,tickAmount,data}) => {
 
@@ -50,7 +53,7 @@ const BonusPointBar = ({leftTitle,yTitle,xTitle,xCategory,max,tickAmount,data}) 
         },
       },
       title: {
-        text: xTitle,
+        // text: xTitle,
         style: {
           fontSize: 12,
           fontWeight: 500,
@@ -75,7 +78,7 @@ const BonusPointBar = ({leftTitle,yTitle,xTitle,xCategory,max,tickAmount,data}) 
       
       },
       title: {
-        text: yTitle,
+        // text: yTitle ,
         style: {
           fontSize: 12,
           fontWeight: 500,
@@ -178,12 +181,26 @@ const BonusPointBar = ({leftTitle,yTitle,xTitle,xCategory,max,tickAmount,data}) 
 
   return (
     <div className="w-full relative p-5">
+     
       <Chart
         ref={chartRef}
         type="bar"
         series={series}
         options={options}
+        className="relative"
       ></Chart>
+      
+      <UpArraow className="absolute top-[28%] left-[18px] transform rotate-180"/>
+      <div className="flex flex-col absolute top-[60%] left-[30px]">
+     <span className="inline-block transform -rotate-90 origin-bottom-left text-[#1492E6] text-[12px] font-medium">Incentive percentage</span>
+     </div>
+     <UpArraow className="absolute top-[66%] left-[18px]"/>
+
+      <div className="flex justify-center gap-4 items-center">
+      <SideArrow/>
+     <span className="inline-block text-[#1492E6] text-[12px] font-medium">{xTitle}</span>
+     <SideArrow className="transform rotate-180"/>
+      </div>
       <button
         className="absolute top-4 right-4 text-base font-medium leading-[32px] text-[#1492E6] bg-[#E7F5FF] rounded-[5px] tracking-[-0.32px] px-[30px]"
         // onClick={handleButtonClick}

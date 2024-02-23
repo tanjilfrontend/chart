@@ -17,6 +17,7 @@ import ModalUpsale from "./components/ModalUpsale";
 import ModalIncentive from "./components/ModalIncentive";
 import ModalRegular from "./components/ModalRegular";
 import ModalAverage from "./components/ModalAverage";
+import UpArraow from "./components/svg-arrow/UpArraow";
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <div className="flex items-center ">
             <CalenderSvg/>
             <p className="text-[12px] font-medium">Date : December 1, 2023 to Dece...</p>
+           
           </div>
           <div className="flex items-center cursor-pointer">
             <PersonSvg/>
@@ -82,7 +84,7 @@ function App() {
 <p className="text-[#000] text-xl font-medium pt-6 px-5">Ideal vs Achieved :</p>
 <div className="flex gap-5 ">
   <div className="w-1/2  m-5 bg-white rounded-[22px]">
-  <BonusPointBar leftTitle="Revision vs Task ratio" yTitle="Incentive percentage" xTitle="Revision Vs Task ratio" xCategory={IdealX1} data={data1} max={100} tickAmount={5}/>
+  <BonusPointBar leftTitle="Revision vs Task ratio" yTitle="Incentive percentage " xTitle="Revision Vs Task ratio" xCategory={IdealX1} data={data1} max={100} tickAmount={5}/>
   </div>
   <div className="w-1/2  m-5 bg-white rounded-[22px]">
   <ChartSingleBar
